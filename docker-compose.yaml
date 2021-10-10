@@ -4,6 +4,8 @@ services:
     build:
       context: backend-python/
       dockerfile: Dockerfile
+    image: sannan1357/backend:v1.0
+    container_name: backend
     networks:
     - application
     ports:
@@ -26,6 +28,7 @@ services:
     - mongodata:/data/db
   mongo-express:
     image: mongo-express
+    container_name: mongoexpress
     environment:
     - ME_CONFIG_MONGODB_SERVER=mongodb
     - ME_CONFIG_MONGODB_ENABLE_ADMIN=true

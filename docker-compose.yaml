@@ -2,7 +2,6 @@ version: '3.7'
 services:
   backend:
     image: sannan1357/backend:v1.0
-    container_name: backend
     networks:
     - application
     ports:
@@ -13,7 +12,6 @@ services:
   mongodb:
     image: mongo
     restart: always
-    container_name: mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: pass12345
@@ -25,7 +23,6 @@ services:
     - mongodata:/data/db
   mongo-express:
     image: mongo-express
-    container_name: mongoexpress
     environment:
     - ME_CONFIG_MONGODB_SERVER=mongodb
     - ME_CONFIG_MONGODB_ENABLE_ADMIN=true

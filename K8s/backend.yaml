@@ -24,7 +24,13 @@ spec:
         ports:
         - containerPort: 8080
           name: tcp
-
+        volumeMounts:
+        - name: configmap-volume
+          mountPath: /users
+      volumes:
+      - name: configmap-volume
+        configMap:
+          name: backend-configmap
 ---
 apiVersion: v1
 kind: Service
@@ -62,9 +68,15 @@ spec:
         image: mongo
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          value: root
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: ROOT_USERNAME
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: pass12345
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: ROOT_PASSWORD
         ports:
         - containerPort: 27017
           name: mongo

@@ -24,6 +24,23 @@ spec:
         ports:
         - containerPort: 8080
           name: tcp
+        readinessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /hello
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            path: /hello
+            port: 8080
+          initialDelaySeconds: 3
+          failureThreshold: 2
+          periodSeconds: 3
         volumeMounts:
         - name: configmap-volume
           mountPath: /users

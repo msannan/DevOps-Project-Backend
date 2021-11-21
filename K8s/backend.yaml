@@ -51,6 +51,7 @@ spec:
         volumeMounts:
         - name: configmap-volume
           mountPath: /users
+      serviceAccountName: backend-service-account
       volumes:
       - name: configmap-volume
         configMap:
@@ -116,3 +117,10 @@ spec:
       resources:
         requests:
           storage: 1Gi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: ServiceAccount
+  name: backend-service-account
